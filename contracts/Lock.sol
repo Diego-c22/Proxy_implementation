@@ -12,14 +12,14 @@ contract Lock is Initializable {
 
     event Withdrawal(uint amount, uint when);
 
-    function initialize(uint _unlockTime) payable public initializer {
+    function initialize(uint _unlockTime, address _owner) payable public initializer {
         require(
             block.timestamp < _unlockTime,
             "Unlock time should be in the future"
         );
 
         unlockTime = _unlockTime;
-        owner = payable(msg.sender);
+        owner = payable(_owner);
     }
 
     function withdraw() virtual public {
